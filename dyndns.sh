@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Expected environment variables:
 # API_TOKEN="<Cloudflare API Token>"
@@ -32,7 +32,9 @@ if [ -z "$current_record" ]; then
   exit 1
 fi
 
-{ read record_id; read record_ip; } <<< "${current_record}"
+{ read record_id; read record_ip; } << EOF
+${current_record}
+EOF
 
 if [ "$current_ip" == "$record_ip" ]; then
 	echo "IP $current_ip has not changed, exiting"
