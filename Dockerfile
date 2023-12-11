@@ -1,3 +1,3 @@
-FROM apteno/alpine-jq:2023-12-03
+FROM apteno/alpine-jq:2023-12-10
 ADD ./dyndns.sh .
 ENTRYPOINT [ "./dyndns.sh" ]
