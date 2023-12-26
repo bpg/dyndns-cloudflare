@@ -8,16 +8,16 @@
 TYPE="A"
 COMMENT="Auto updated @ $(date)"
 
-#get the current IP address
+# get the current IP address
 current_ip=$(curl --silent http://checkip.amazonaws.com/)
 
-#validate the IP address
+# validate the IP address
 if [[ ! $current_ip =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
 	echo "IP address is invalid: $current_ip"
 	exit 1
 fi
 
-#find the current record in Cloudflare
+# find the current record in Cloudflare
 get_record_response=$(curl --silent --request GET --url "https://api.cloudflare.com/client/v4/zones/${HOSTED_ZONE_ID}/dns_records" \
   --header 'Content-Type: application/json' \
   --header "Authorization: Bearer ${API_TOKEN}")
