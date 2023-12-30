@@ -1,0 +1,8 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
+    "github>bpg/renovate-config",
+    "github>bpg/renovate-config:automerge-github-actions",
+    "github>bpg/renovate-config:automerge-docker-digest",
+  ],
+}
