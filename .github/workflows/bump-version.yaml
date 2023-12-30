@@ -5,20 +5,28 @@ on:
       - main
     paths-ignore:
       - ./github/**
-
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-    - uses: actions/checkout@v4
+
+    - name: "Generate Short Lived OAuth App Token (ghs_*)"
+      uses: actions/create-github-app-token@v1.6.2
+      id: app-token
+      with:
+        app-id: "${{ secrets.BPG_APP_ID }}"
+        private-key: "${{ secrets.BPG_APP_PRIVATE_KEY }}"
+
+    - name: Checkout code
+      uses: actions/checkout@v4
       with:
         fetch-depth: '0'
 
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.64.0 
       env:
-        GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
+        GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         DEFAULT_BUMP: patch
         WITH_V: true
