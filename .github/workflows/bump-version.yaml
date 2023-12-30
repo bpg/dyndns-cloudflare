@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths-ignore:
-      - 'github/**'
+      - '.github/**'
 jobs:
   build:
     runs-on: ubuntu-latest
