@@ -1,4 +1,3 @@
----
 name: "Scheduled: Cleanup"
 
 on:
@@ -6,13 +5,12 @@ on:
   schedule:
     - cron: "0 4 * * 1"
 
-permissions:
-  packages: write
-
 jobs:
   cleanup:
     name: Cleanup untagged images
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       
       - name: Set up Docker Buildx
