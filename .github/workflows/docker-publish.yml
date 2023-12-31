@@ -16,7 +16,8 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-
+  # mainly to skip `unknown/unknown` arch from pushing to ghcr.io
+  BUILDX_NO_DEFAULT_ATTESTATIONS: 1
 
 jobs:
   build:
