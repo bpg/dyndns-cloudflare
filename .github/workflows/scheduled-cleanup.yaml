@@ -25,23 +25,23 @@ jobs:
           username: "${{ github.repository_owner }}"
           password: "${{ secrets.GHCR_OPERATIONS_TOKEN }}"
 
-      # - name: Delete all containers from package without tags
-      #   uses: Chizkiyahu/delete-untagged-ghcr-action@v3
-      #   with:
-      #     token: ${{ steps.app-token.outputs.token }}
-      #     repository_owner: ${{ github.repository_owner }}
-      #     repository: ${{ github.repository }}
-      #     untagged_only: true
-      #     owner_type: user
-      #     except_untagged_multiplatform: true
-
-      - name: Prune containers
-        uses: vlaurin/action-ghcr-prune@v0.5.0
+      - name: Delete all containers from package without tags
+        uses: Chizkiyahu/delete-untagged-ghcr-action@v3
         with:
           token: "${{ secrets.GHCR_OPERATIONS_TOKEN }}"
-          organization: "${{ github.repository_owner }}"
-          container: "${{ github.event.repository.name }}"
-          dry-run: true # Dry-run first, then change to `false`
-          keep-younger-than: 7 # days
-          keep-last: 2
-          prune-untagged: true
+          repository_owner: ${{ github.repository_owner }}
+          repository: ${{ github.repository }}
+          untagged_only: true
+          owner_type: user
+          except_untagged_multiplatform: true
+
+      # - name: Prune containers
+      #   uses: vlaurin/action-ghcr-prune@v0.5.0
+      #   with:
+      #     token: "${{ secrets.GHCR_OPERATIONS_TOKEN }}"
+      #     organization: "${{ github.repository_owner }}"
+      #     container: "${{ github.event.repository.name }}"
+      #     dry-run: true # Dry-run first, then change to `false`
+      #     keep-younger-than: 7 # days
+      #     keep-last: 2
+      #     prune-untagged: true
