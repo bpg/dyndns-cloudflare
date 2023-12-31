@@ -37,11 +37,11 @@ ${current_record}
 EOF
 
 if [ "$current_ip" == "$record_ip" ]; then
-	echo "IP $current_ip has not changed, exiting"
+	echo "The IP address $current_ip has not changed, exiting"
 	exit 0
 fi
 
-echo "IP changed $record_ip->$current_ip, updating record $RECORD_NAME"
+echo "The IP address has changed from $record_ip to $current_ip, updating record $RECORD_NAME"
 
 update_record_response=$(curl --silent --request PUT --url "https://api.cloudflare.com/client/v4/zones/56de39c55b0fb37eac751a5f39f50760/dns_records/${record_id}" \
   --header 'Content-Type: application/json' \
@@ -57,7 +57,7 @@ if [ "$(echo "$get_record_response" | jq -r '.success' )" == "false" ]; then
   echo "Error updating record: $( echo "$update_record_response"| jq -r '.errors[0].message')"
   exit 1
 else
-  echo "Record updated successfully"
+  echo "The record $RECORD_NAME has been successfully updated"
   echo "$update_record_response" | jq
   exit 0
 fi
