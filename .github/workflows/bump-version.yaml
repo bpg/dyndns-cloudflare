@@ -1,10 +1,16 @@
-name: Bump version
+name: Bump Version
+
+# The action uses the GitHub App token to create a tag and push it to the repository.
+# This is required because the default GITHUB_TOKEN does not trigger other actions, such as the publish action on tag push. 
+
 on:
   push:
     branches:
       - main
     paths-ignore:
       - '.github/**'
+      - 'README.md'
+
 jobs:
   bump:
     runs-on: ubuntu-latest
